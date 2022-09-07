@@ -1,0 +1,316 @@
+>форматирование документов<
+
+index.html:
+
+<!DOCTYPE html>
+<html lang="ru"> // div и тд это тэги
+	<head>
+		<meta charset="UTF-8">
+		<title>Веб-разработчик Иванов Иван Иванович</title>
+		<link rel="stylesheet" href="style.css"> // style.css - это путь
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		 <header class="header_class">
+			<div clacc="container">
+				<nav class="main-menu">
+					<ui>
+						<li><a href="#about">Обо мне</a></li>
+						<li><a href="#skills">Навыки</a></li>
+						<li><a href="#technologies">Технологии</a></li>
+					</ui>
+				</nav>
+			</div>
+			<div class="text-center">
+				<h1>Ивынов ИИ</h1>
+				<h2>Веб разработчик</h2>
+				<p class="w-50 mx-auto">текст....</p>
+				<a href="mailto:fogzan@yandex.ru"> написать мне </a>
+			</div>
+		</header>
+
+		<main>
+		   	<div class="container">
+				<section id="about">
+					<h3>Обо мне</h3>
+					
+					<figure class="avatar">
+						<img src="images/person.png" alt="person">
+					</figure>
+	
+					<p>Lorem ipsum.....</p>
+				</section>
+
+				<section id="skills">
+					<h3>Навыки</h3>
+					<p>
+						<ol> // ol>li*4
+							<li>Pyton</li>
+							<li>Java</li>
+							<li>c++</li>
+							<li>css</li>
+						</ol>
+					</p>
+				</section>
+
+				<section id="technologies">
+					<h3>Технологии</h3>
+					<pre>
+						кцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщ
+
+кцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщкцгшмтгшуцщмтгнщфщьгшфуиущгткмгщ
+
+					</pre>
+				</section>
+			</div>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				&copy; Мушкин СВ
+			</div>
+		</footer>
+	</body>
+</html>
+
+
+
+about.html:
+
+<!DOCTYPE html>
+<html lang="ru"> // div и тд это тэги
+	<head>
+		<meta charset="UTF-8">
+		<title>Веб-разработчик Иванов Иван Иванович</title>
+		<link rel="stylesheet" href="style.css"> // style.css - это путь
+	</head>
+	<body>
+		 <header class="header_class">
+			<div clacc="container">
+				<nav class="main-menu">
+					<ui>
+						<li><a class="btn" href="index.html">На главную</a></li>
+					</ui>
+				</nav>
+			</div>
+			<div class="text-center">
+				<h1>Ивынов ИИ</h1>
+				<h2>Веб разработчик</h2>
+				<p class="w-50 mx-auto">текст....</p>
+				<a href="mailto:fogzan@yandex.ru"> написать мне </a>
+			</div>
+		</header>
+
+		<main>
+		   	<div class="container">
+				<section id="about">
+					<p> </p>
+				</section>
+			</div>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				&copy; Мушкин СВ
+			</div>
+		</footer>
+	</body>
+</html>
+
+
+skills.html:
+
+<!DOCTYPE html>
+<html lang="ru"> // div и тд это тэги
+	<head>
+		<meta charset="UTF-8">
+		<title>Веб-разработчик Иванов Иван Иванович</title>
+		<link rel="stylesheet" href="style.css"> // style.css - это путь
+	</head>
+	<body>
+		 <header class="header_class">
+			<div clacc="container">
+				<nav class="main-menu">
+					<ui>
+						<li><a class="btn" href="index.html">На главную</a></li>
+					</ui>
+				</nav>
+			</div>
+			<div class="text-center">
+				<h1>Ивынов ИИ</h1>
+				<h2>Веб разработчик</h2>
+				<p class="w-50 mx-auto">текст....</p>
+				<a href="mailto:fogzan@yandex.ru"> написать мне </a>
+			</div>
+		</header>
+
+		<main>
+		   	<div class="container">
+				<section id="about">
+					<p> </p>
+				</section>
+			</div>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				&copy; Мушкин СВ
+			</div>
+		</footer>
+	</body>
+</html>
+
+
+technologies.html:
+
+<!DOCTYPE html>
+<html lang="ru"> // div и тд это тэги
+	<head>
+		<meta charset="UTF-8">
+		<title>Веб-разработчик Иванов Иван Иванович</title>
+		<link rel="stylesheet" href="style.css"> // style.css - это путь
+	</head>
+	<body>
+		 <header class="header_class">
+			<div clacc="container">
+				<nav class="main-menu">
+					<ui>
+						<li><a class="btn" href="index.html">На главную</a></li>
+					</ui>
+				</nav>
+			</div>
+			<div class="text-center">
+				<h1>Ивынов ИИ</h1>
+				<h2>Веб разработчик</h2>
+				<p class="w-50 mx-auto">текст....</p>
+				<a href="mailto:fogzan@yandex.ru"> написать мне </a>
+			</div>
+		</header>
+
+		<main>
+		   	<div class="container">
+				<section id="about">
+					<p> </p>
+				</section>
+			</div>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				&copy; Мушкин СВ
+			</div>
+		</footer>
+	</body>
+</html>
+
+
+
+
+
+
+css:
+style.css
+
+header { 
+	background-color: black;  // black / rgb(0, 0, 0) / rgba(0, 0, 0, 0.5) / #f000000
+	color: white;
+	padding: 20px 0; // сверху и снизу / лев и прав
+	font-size: 1em;  
+		// стандарт 16px / 1em - относительно родительского класса (1 - тот же)
+		// 1rem - относительного корневого элемента
+	font-weight: bold;
+	background-images: url(images/background.jpg);
+	backgroung-size: cover;
+}
+
+body {
+	margin: 0; //внешний отступ 0px
+}
+
+.header_class {
+	
+}
+
+.main_menu ui {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.main_menu li {
+	display: inline;
+	margin-right: 10px;
+}
+
+
+.main_menu li:last-child {
+	margin-right: 0;
+}
+
+.main_menu a {
+	text-decoration: none;
+	color: white;
+}
+
+.container {
+	max-width: 75%;
+	margin: 0 auto;
+}
+
+p {
+	text-align: justify;
+}
+
+.footer {
+	background-color: black;
+	color: white;
+}
+
+.avatar {
+	text-aligh: center;
+	height: 300px;
+	background-images: url(images/background1.png); // для изображения логотипов советуют svg
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.avatar img {
+	height: 100%;
+}
+
+.text-center {
+	text-aligh: center;
+}
+
+.w-50 {
+	width: 50%;
+}
+
+.mx-auto {
+	mergin-left: auto;
+	mergin-right: auto;
+}
+
+.btn {
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+	border: 2px solid black;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+contact-me-btn {
+	color: white;
+	border-color: white;
+}
+
+!important - выдача приоритетности 
+
+
+
+
+
