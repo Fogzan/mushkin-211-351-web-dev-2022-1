@@ -1,0 +1,160 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  background-image: url(images/background.jpg);
+  background-size: cover;
+  color: white;
+  padding: 20px 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.main-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.main-menu a {
+  text-decoration: none;
+
+  font-size: 1.2em;
+}
+
+.main-menu li:last-child {
+  margin-right: 0;
+}
+
+.container {
+  max-width: 75%;
+  margin: 0 auto;
+}
+
+.main-container {
+  max-width: 75%;
+  margin: 10px auto 20px auto;
+}
+
+.main-container h3 {
+  font-size: 30px;
+  text-decoration: underline;
+}
+
+.main-container section {
+  padding: 20px;
+}
+
+p {
+  text-align: justify;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  padding: 20px 0;
+}
+
+.avatar, 
+.avatar-2 {
+  height: 300px;
+  text-align: center;
+  background-image: url(images/background1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.avatar-2 img{
+  border-radius: 20%;
+  height: 90%;
+  width: auto;
+}
+
+.avatar img {
+  height: 100%;
+}
+
+.text-center {
+  text-align: center;
+  margin: 0 auto 0 auto;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.mx-auto {
+  margin: 0 auto;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.contact-me-btn {
+  color: white;
+  border-color: white;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+.mail, 
+.phone {
+  color: white;
+}
+
+.table_avatars {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table_avatars th {
+  border: none;
+}
+
+.nick {
+  width: auto;
+  text-align: center;
+  border-collapse: collapse;
+  padding: 0px;
+  margin: 0 auto 10px auto;
+}
+
+.nick th {
+  border: none;
+}
+
+.nickname {
+  font-size: 70px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+.use {
+  color: white;
+}
+
+.no-use {
+  color: gray;
+}
