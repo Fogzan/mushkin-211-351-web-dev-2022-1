@@ -38,6 +38,10 @@ body {
   margin: 0 auto;
 }
 
+.font-size {
+  font-size: 40px;
+}
+
 .main-container {
   max-width: 75%;
   margin: 10px auto 20px auto;
@@ -62,7 +66,7 @@ p {
   padding: 20px 0;
 }
 
-.avatar, 
+.avatar,
 .avatar-2 {
   height: 300px;
   text-align: center;
@@ -71,7 +75,7 @@ p {
   background-position: center;
 }
 
-.avatar-2 img{
+.avatar-2 img {
   border-radius: 20%;
   height: 90%;
   width: auto;
@@ -120,7 +124,7 @@ td {
   padding: 10px;
 }
 
-.mail, 
+.mail,
 .phone {
   color: white;
 }
