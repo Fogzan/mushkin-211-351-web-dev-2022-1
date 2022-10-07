@@ -1,0 +1,14 @@
+.header,
+.sidebar {
+    display: none;
+}
+
+.contant-header {
+    text-align: center;
+}
+
+.game-list {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="print.css" media="print">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <header class="header">
+        <div class="container d-flex al-items">
+            <div class="game-library">
+                <a href="">Game Library</a>
+            </div>
+            <nav class="main-menu">
+                <ul>
+                    <li><a href="">Каталог</a></li>
+                    <li><a href="">Магазин</a></li>
+                    <li><a href="">Лучшее</a></li>
+                    <li><a href="">Отзывы</a></li>
+                    <li><a href="">Топ игроков</a></li>
+                </ul>
+            </nav>
+            <div class="profile">
+                <a href="">Вход</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container d-flex">
+        <aside class="sidebar">
+            <form>
+                <fieldset class="filter">
+                    <legend>Фильтр</legend>
+                    <fieldset class="sidebar-section">
+                        <legend>Жанр</legend>
+                        <div>
+                            <input type="checkbox" name="manufacturer" id="manufacturer1">
+                            <label for="manufacturer1">Жанр 1</label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" name="manufacturer" id="manufacturer2">
+                            <label for="manufacturer2">Жанр 2</label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" name="manufacturer" id="manufacturer3">
+                            <label for="manufacturer3">Жанр 3</label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" name="manufacturer" id="manufacturer4">
+                            <label for="manufacturer4">Жанр 4</label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" name="manufacturer" id="manufacturer5">
+                            <label for="manufacturer5">Жанр 5</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="sidebar-section">
+                        <legend>Издатель</legend>
+
+                        <div>
+                            <input type="radio" name="group" id="group1">
+                            <lable for="group1">Издатель 1</lable>
+                        </div>
+                        <div>
+                            <input type="radio" name="group" id="group2">
+                            <lable for="group2">Издатель 2</lable>
+                        </div>
+                        <div>
+                            <input type="radio" name="group" id="group3">
+                            <lable for="group3">Издатель 3</lable>
+                        </div>
+                        <div>
+                            <input type="radio" name="group" id="group4">
+                            <lable for="group4">Издатель 4</lable>
+                        </div>
+                        <div>
+                            <input type="radio" name="group" id="group5">
+                            <lable for="group5">Издатель 5</lable>
+                        </div>
+                    </fieldset>
+                    <button type="submit">Применить</button>
+                </fieldset>
+            </form>
+        </aside>
+
+        <div class="page-content">
+            <h1 class="contant-header">Каталог игр</h1>
+            <div class="game-list d-flex">
+
+                <div class="game-card d-flex">
+                    <div class="game-img">
+                        <img src="img\minecraft.jpg" alt="">
+                    </div>
+                    <div class="game-text d-flex">
+                        <div class="game-name">Minecraft</div>
+                        <div class="game-description">Компьютерная инди-игра в жанре песочницы, созданная шведским
+                            программистом Маркусом Перссоном и выпущенная его компанией Mojang AB. Перссон опубликовал
+                            начальную версию игры в 2009 году.</div>
+                        <div class="more-detailed"><a href="">Подробнее</a></div>
+                    </div>
+                </div>
+
+                <div class="game-card d-flex">
+                    <div class="game-img">
+                        <img src="img\csgo.jpg" alt="">
+                    </div>
+                    <div class="game-text d-flex">
+                        <div class="game-name">CS:GO</div>
+                        <div class="game-description">Counter-Strike: Global Offensive — соревновательный шутер от
+                            первого лица, разработанный и издаваемый компанией Valve. Является сиквелом для CS: SOurce и
+                            CS 1.6. В игре отсутствует одиночная кампания, весь геймплей построен вокруг нескольких
+                            сетевых режимов. Главным из них считается соревновательный.</div>
+                        <div class="more-detailed"><a href="">Подробнее</a></div>
+                    </div>
+                </div>
+
+                <div class="game-card d-flex">
+                    <div class="game-img">
+                        <img src="img\cult.png" alt="">
+                    </div>
+                    <div class="game-text d-flex">
+                        <div class="game-name">Cult of the Lamb</div>
+                        <div class="game-description">Инди с элементами рогалика и стратегии, в котором игроку в роли
+                            одержимого ягнёнка нужно содержать свой культ.</div>
+                        <div class="more-detailed"><a href="">Подробнее</a></div>
+                    </div>
+                </div>
+
+                <div class="game-card d-flex">
+                    <div class="game-img">
+                        <img src="img\genshin.jpg" alt="">
+                    </div>
+                    <div class="game-text d-flex">
+                        <div class="game-name">Genshin Impact</div>
+                        <div class="game-description"> приключенческая ролевая игра с открытым миром. Вам предстоит
+                            исследовать волшебный мир Тейват. На этом огромном континенте вы посетите семь королевств,
+                            найдёте спутников с различными умениями и сразитесь с могущественными врагами в поисках
+                            пропавшего близкого человека.</div>
+                        <div class="more-detailed"><a href="">Подробнее</a></div>
+                    </div>
+                </div>
+
+                <div class="game-card d-flex">
+                    <div class="game-img">
+                        <img src="img\hollow.jpeg" alt="">
+                    </div>
+                    <div class="game-text d-flex">
+                        <div class="game-name">Hollow Knight</div>
+                        <div class="game-description">Это мультиплатформенная компьютерная игра в жанре метроидвания,
+                            выпущенная инди-студией Team Cherry 24 февраля 2017 года для Windows. Месяцем позже была
+                            портирована разработчиками на Linux и macOS. Разработка игры была спонсирована через сервис
+                            Kickstarter. </div>
+                        <div class="more-detailed"><a href="">Подробнее</a></div>
+                    </div>
+                </div>
+
+                <div class="game-card d-flex">
+                    <div class="game-img">
+                        <img src="img\risk.jpg"
+                            alt="">
+                    </div>
+                    <div class="game-text d-flex">
+                        <div class="game-name">Risk of Rain</div>
+                        <div class="game-description">Приключенческий ролевой экшен с видом от третьего лица и
+                            элементами рогалика в научно-фантастическом сеттинге. События игры перенесут вас на
+                            отдаленную планету, где проживает множество свирепых существ.</div>
+                        <div class="more-detailed"><a href="">Подробнее</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
