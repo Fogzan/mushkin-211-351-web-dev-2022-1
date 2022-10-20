@@ -100,7 +100,7 @@ body {
 
 .game-img {
     height: 100%;
-    flex-basis: 50%;
+    width: 50%;
 }
 
 .game-img img {
@@ -111,7 +111,7 @@ body {
 
 .game-text {
     /* height: 100%; */
-    flex-basis: 50%;
+    width: 50%;
     padding: 1rem;
     flex-direction: column;
 }
@@ -146,6 +146,66 @@ body {
 
 .game-list {
     flex-wrap: wrap;
-    /* justify-content: space-around;
-    align-content: space-between; */
+}
+
+.news-header {
+    font-size: 4.5rem;
+    font-family: 'Silkscreen', cursive;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.news-lists {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-top: 2.5rem;
+}
+
+.news-container {
+    border: 2px solid black;
+    height: 7.2rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: lightgrey;
+}
+
+.news-main {
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+.news-contant {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.news-img img {
+    height: 7rem;
+    object-fit: fill;
+}
+
+.news-img {
+    /* border-right: 2px solid black; */
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.news-detals a img {
+    height: 7rem;
+    width: 100%;
+    object-fit: fill;
+}
+
+.news-detals {
+    margin-left: auto;
+    flex-shrink: 0;
+    /* border-left: 2px solid black; */
+}
+
+.news-text {
+    padding: 1rem;
+    font-size: 1.2rem;
 }
