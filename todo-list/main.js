@@ -33,6 +33,7 @@ async function parseTask(taskId) {
     //let task = JSON.parse(value);
     let thisUrl = new URL(url + "/" + taskId);
     thisUrl.searchParams.append("api_key", key);
+    console.log(thisUrl);
     try {
         let response = await fetch(thisUrl, { method: "GET" });
         let task = await response.json();
@@ -127,10 +128,20 @@ async function clickBtnHandler(event) {
         let task = await createTask(name, desc, status);
         addTaskInHtml(task);
     } else if (action == "edit") {
-        let newTask = parseTask(taskId);
+        let newTask = await parseTask(taskId);
         newTask.name = name;
         newTask.desc = desc;
-        localStorage.setItem("task-" + taskId, JSON.stringify(newTask));
+        let formData = new FormData();
+        formData.append('name', name);
+        formData.append('desc', desc);
+        let thisUrl = new URL(url + "/" + taskId);
+        thisUrl.searchParams.append("api_key", key);
+        try {
+            let response = await fetch(thisUrl, { method: "PUT", body: formData });
+            let data = await response.json();
+        } catch (err) {
+            showAlert(err.message, "alert-danger");
+        }
         document.getElementById(taskId).querySelector(".task-name").textContent = name;
     }
     formElements['status'].closest('.row').classList.remove('d-none');
@@ -180,7 +191,7 @@ async function deleteEvent(event) {
 }
 
 // Изменение модальных окон для изменения и просмотра
-function actionEvent(event) {
+async function actionEvent(event) {
     let action = event.relatedTarget.dataset.action;
     let form = event.target.querySelector('form');
     let task;
@@ -189,7 +200,7 @@ function actionEvent(event) {
     event.target.querySelector('.create-btn').textContent = actionBtn[action];
     if (action == 'edit') {
         let taskId = event.relatedTarget.closest('.task').id;
-        task = parseTask(taskId);
+        task = await parseTask(taskId);
         form.elements['name'].value = task.name;
         form.elements['desc'].value = task.desc;
         form.elements['taskId'].value = taskId;
@@ -197,7 +208,7 @@ function actionEvent(event) {
     }
     if (action == 'show') {
         let taskId = event.relatedTarget.closest('.task').id;
-        task = parseTask(taskId);
+        task = await parseTask(taskId);
         form.elements['name'].value = task.name;
         form.elements['desc'].value = task.desc;
         form.elements['taskId'].value = taskId;
