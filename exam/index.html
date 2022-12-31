@@ -14,8 +14,8 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid px-5 fs-3">
-                <a class="navbar-brand fs-1 px-3" href="#">Экскурсии Москвы</a>
+            <div class="container-fluid px-5 fs-4">
+                <a class="navbar-brand fs-2 px-3" href="#">Экскурсии Москвы</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -24,12 +24,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="#">О компании</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="#">Преимущества</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Оформить заявку</a>
                         </li>
                     </ul>
+                            <a class="nav-link d-flex justify-content-end" href="#">Личный кабинет</a>
                 </div>
             </div>
         </nav>
@@ -86,20 +90,21 @@
         </div>
 
         <div class="text-bg-secondary">
-            <div class="container py-4">
-                <div class="fs-1">Список пешеходных маршрутов</div>
+            <div class="text-center fs-1 py-2">Оформить заявку</div>
+            <div class="container py-2">
+                <div class="fs-2">Список пешеходных маршрутов</div>
                 <div class="row py-2">
                     <div class="col-lg-6 col-md-12 py-2">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="search-routes" placeholder="Поиск по маршрутам">
+                            <input type="text" class="form-control search-routes" id="search-routes"
+                                placeholder="Поиск по маршрутам">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12 py-2">
-                        <select class="form-select" aria-label="search-attractions">
-                            <option selected>Достопримечательности</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-select list-attractions" aria-label="search-attractions">
+                            <option selected value="" class="elem-attractions">Достопримечательности (не выбрано)
+                            </option>
+                            <option class="d-none exaple-attractions elem-attractions"></option>
                         </select>
                     </div>
                 </div>
@@ -118,17 +123,18 @@
                         <tbody class="list-excursion">
                             <tr class="exaple-excursion d-none">
                                 <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"></td>
+                                <td>test</td>
+                                <td>test</td>
+                                <td>test</td>
+                                <td><input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault2"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
-            <div class="d-flex py-2 justify-content-center">
+
+            <div class="d-flex py-3 justify-content-center">
                 <div class="pagination">
                     <button class="btn first-page-btn" data-page="0">Первая страница</button>
                     <div class="pages-btn">
@@ -141,12 +147,82 @@
                     <button class="btn last-page-btn" data-page="6">Последняя страница</button>
                 </div>
             </div>
+
+            <div class="container py-4 guidesList d-none">
+                <div class="fs-2">Список доступных гидов</div>
+                <div class="row py-2">
+                    <div class="col-lg-6 col-md-12 py-2">
+                        <select class="form-select list-language" aria-label="search-attractions">
+                            <option selected value="">Язык (Не выбрано)</option>
+                            <option class="d-none example-language">test</option>
+
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12 py-2">
+                        <div class="row">
+                            <div class="col-4 fs-4 text-center">Опыт работы:</div>
+                            <div class="col-4"><input type="text" class="form-control experience-from" id=""
+                                    placeholder="От"></div>
+                            <div class="col-4"><input type="text" class="form-control experience-up-to" id=""
+                                    placeholder="До"></div>
+                        </div>
+                        <!-- <select class="form-select" aria-label="search-attractions">
+                            <option selected>Опыт работы (Не выбрано)</option>
+                            <option value="1" class="d-none">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select> -->
+                    </div>
+                </div>
+
+                <div class="bg-light table-routes w-100">
+                    <table class="table w-100">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">фото</th>
+                                <th scope="col">ФИО</th>
+                                <th scope="col">Языки</th>
+                                <th scope="col">Опыт работы в годах</th>
+                                <th scope="col">Стоимость услуг в час</th>
+                                <th scope="col">Выбрать</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list-guide">
+                            <tr class="exaple-guide d-none">
+                                <th scope="row">1</th>
+                                <td class="w-25"><img src="images\profile.jpg" alt="" class="img-fluid"></td>
+                                <td>test</td>
+                                <td>test</td>
+                                <td>test</td>
+                                <td>test</td>
+                                <td><input class="form-check-input" type="radio" name="flexRadioDefault" id=""></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="py-4">
+                    <div class="d-flex justify-content-end d-none containet-btn-make-an-application">
+                        <button type="button" class="btn btn-light btn-lg make-an-application">Оформить заявку</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
 
     <footer>
-
+        <div class="text-bg-dark">
+            <hr class="border border-primary border-3 opacity-75">
+            <div class="container py-4">
+                <div class="fs-4">Контактная информация</div>
+                <hr>
+                <div class="fs-6">
+                    <div class="py-1">Почта: Fogzan@yandex.ru</div>
+                    <div class="py-1">Телефон: 8(968)946-78-13</div>
+                </div>
+            </div>
+        </div>
     </footer>
 
 
