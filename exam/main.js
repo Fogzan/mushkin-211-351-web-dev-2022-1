@@ -1,17 +1,34 @@
 let url = "http://exam-2023-1-api.std-900.ist.mospolytech.ru/api";
 let key = "740a2b97-6ea6-453d-9f60-425597307217";
-let countOfPages;
-let globalListRoutes;
-let globalListGuides;
-let temporaryListRoutes;
-let selectRoute;
-let selectGuide;
-let globalListAttractions = new Array();
-let experienceFrom, experienceUpTo;
+let countOfPages; //
+let globalListRoutes; // Весь список маршрутов
+let globalListGuides; // Весь список гидов по маршруту
+let temporaryListRoutes; // "Отсортированные" маршруты
+let selectRoute; // Выбранный маршрут id
+let selectGuide; // Выбранный гид id
+let globalListAttractions = new Array(); // Весь список дост.
+let experienceFrom, experienceUpTo; // Опыт работы
+let price;
 
 // Показ уведомлений, взят из Bootstrap5 (https://getbootstrap.com/docs/5.3/components/alerts/)
 function showAlert(error, color) {
     let alerts = document.querySelector(".alerts");
+    let alert = document.createElement("div");
+    alert.classList.add("alert", "alert-dismissible", color);
+    alert.append(error);
+
+    let btn = document.createElement("button");
+    btn.setAttribute("type", "button");
+    btn.classList.add("btn-close");
+    btn.setAttribute("data-bs-dismiss", "alert");
+    btn.setAttribute("aria-label", "Close");
+    alert.append(btn);
+    alerts.append(alert);
+}
+
+// Показ уведомлений в личном кабинете
+function showAlertPerson(error, color) {
+    let alerts = document.querySelector(".alerts-person");
     let alert = document.createElement("div");
     alert.classList.add("alert", "alert-dismissible", color);
     alert.append(error);
@@ -66,13 +83,13 @@ async function downloadFromServerRoutes() {
     // xhr.responseType = 'json';
     // xhr.send();
     // xhr.onload = function () {
-    //     console.log(this.response);
+    //console.log(this.response);
     // };
 
     try {
         let response = await fetch(thisUrl, { method: "GET" });
         let routes = await response.json();
-        // console.log(filter(routes));
+        //console.log(filter(routes));
         globalListRoutes = routes;
         return routes;
     } catch (error) {
@@ -82,7 +99,7 @@ async function downloadFromServerRoutes() {
 
 // Загрузка количество страниц и выбранной страницы (на вход: количество страниц)
 function loadNumberPages(numberPage, maxPages) {
-    // console.log(numberPage + " " + maxPages);
+    //console.log(numberPage + " " + maxPages);
     let page0 = document.querySelectorAll("[data-page=\"0\"]")[0];
     let page1 = document.querySelectorAll("[data-page=\"1\"]")[0];
     let page2 = document.querySelectorAll("[data-page=\"2\"]")[0];
@@ -200,6 +217,7 @@ function loadRoutes(numberPage, routes) {
     }
     //console.log(document.querySelectorAll('.radio-route'));
     let radioList = document.querySelectorAll('.radio-route');
+    //console.log(radioList);
     for (let i = 0; i < radioList.length; i++) {
         elem = radioList[i];
         elem.onchange = radioRouteChange;
@@ -320,7 +338,9 @@ function addNewElemGuides(number, infoElem) {
 function addLanguage(language) {
     let listLanguage = document.querySelector(".list-language");
     let exapleLanguage = document.querySelector(".example-language").cloneNode(true);
-    listLanguage.innerHTML += "<option value=\" " + language + "\" class=\"element-language\">" + language + "</option>";
+    if (document.querySelector(".list-language").innerHTML.indexOf(language) == -1) {
+        listLanguage.innerHTML += "<option value=\" " + language + "\" class=\"element-language\">" + language + "</option>";
+    }
 }
 
 // Выбор языка у гида
@@ -362,16 +382,16 @@ function loadGuideList(guides) {
 
 // Обработчик события Нажатие на выбор гида
 function radioGuideChange(event) {
-    if (selectGuide)
+    if (selectGuide && document.querySelector("[data-id='" + selectGuide + "']"))
         document.querySelector("[data-id='" + selectGuide + "']").parentNode.parentNode.classList.remove("select-guide");
     selectGuide = event.target.value;
     event.target.parentNode.parentNode.classList.add("select-guide");
-    document.querySelector('.containet-btn-make-an-application').classList.remove("d-none");
+    document.querySelector('.container-btn-make-an-application').classList.remove("d-none");
 }
 
 // Обработчик события Нажатие на выбор маршрута
 function radioRouteChange(event) {
-    if (selectRoute)
+    if (selectRoute && document.querySelector("[data-id='" + selectRoute + "']"))
         document.querySelector("[data-id='" + selectRoute + "']").parentNode.parentNode.classList.remove("select-route");
     selectRoute = event.target.value;
     event.target.parentNode.parentNode.classList.add("select-route");
@@ -383,6 +403,8 @@ function sortJsonExpWork(oldJson, expFrom, expUptTo) {
     //let oldJson = globalListGuides;
     const jsonLength = oldJson.length;
     let newJson = new Array();
+    expFrom = Number(expFrom);
+    expUptTo = Number(expUptTo);
     for (let i = 0; i < jsonLength; i++) {
         let jsonElement = oldJson[i];
         if (expFrom >= 0 || expUptTo >= 0) {
@@ -408,9 +430,7 @@ function sortJsonExpWork(oldJson, expFrom, expUptTo) {
 }
 // Функция поиска по опыту работы
 function searchExperienceWork() {
-    //let newListGuides = sortJsonExpWork(experienceFrom, experienceUpTo);
-    let listGuide = startSortGuides();
-    loadGuideList(listGuide);
+    loadGuideList(startSortGuides());
 }
 
 // обработчик события ввода опыта работы ДО
@@ -425,9 +445,151 @@ function searchExperienceUpTo(event) {
     searchExperienceWork();
 }
 
+//Поиск в json по id
+function searchById(jsonArray, idElem) {
+    for (let i = 0; i < jsonArray.length; i++)
+        if (jsonArray[i].id == idElem) return jsonArray[i];
+}
+
+// Праздничные дни:
+// с 1 по 9 января (9 дней)
+// с 6 по 8 марта (3 дня)
+// с 30 апреля по 3 мая (4 дня)
+// с 7 по 10 мая (4 дня)
+// с 11 по 13 июня (3 дня)
+// с 4 по 6 ноября (3 дня)
+
+// Расчет итоговой стоимовти
+function costCalculation(event) {
+    price = 1;
+    let guideServiceCost = searchById(globalListGuides, selectGuide).pricePerHour;
+    let hoursNumber = Number(document.querySelector('.modal-select-time').options[ document.querySelector('.modal-select-time').selectedIndex ].value);
+    price = price * guideServiceCost * hoursNumber;
+    let isThisDayOff;
+    if (document.querySelector('.modal-data').valueAsDate) {
+        let month = document.querySelector('.modal-data').valueAsDate.getUTCMonth() + 1;
+        let day = document.querySelector('.modal-data').valueAsDate.getUTCDate();
+        let nDay = document.querySelector('.modal-data').valueAsDate.getUTCDay();
+        if (nDay == 6 || nDay == 0) isThisDayOff = 1.5;
+        else if (((month == 1) && (day >= 1 && day <= 9)) || ((month == 3) && (day >= 6 && day <= 8)) || ((month == 4) && (day >= 30) ||  (month == 5) && (day <= 3)) || 
+        ((month == 5) && (day >= 7 && day <= 10)) || ((month == 6) && (day >= 11 && day <= 13)) || ((month == 11) && (day >= 4 && day <= 6))) {
+            isThisDayOff = 1.5;
+        } else isThisDayOff = 1;
+        price = price * isThisDayOff;
+    }
+    let isItMorning, isItEvening;
+    if (document.querySelector('.modal-time').value) {
+        let hoursTime = Number(document.querySelector('.modal-time').value.split(":")[0]);
+        if (hoursTime >= 9 && hoursTime <= 12) {
+            isItMorning = 400;
+            isItEvening = 0;
+        }
+        else if (hoursTime >= 20 && hoursTime <= 23) {
+            isItEvening = 1000;
+            isItMorning = 0;
+        }
+        else {
+            isItMorning = 0;
+            isItEvening = 0;
+        }
+        price = price + isItMorning + isItEvening;
+    }
+    let numberOfVisitors;
+    if (document.querySelector('.modal-number-people').value) {
+        let numberPeople = Number(document.querySelector('.modal-number-people').value);
+        if (numberPeople >= 1 && numberPeople <= 5) numberOfVisitors = 0;
+        else if (numberPeople > 5 && numberPeople <= 10) numberOfVisitors = 1000;
+        else if (numberPeople > 10 && numberPeople <= 20) numberOfVisitors = 1500;
+        price = price + numberOfVisitors;
+    }
+
+    // 1ая из опций
+    if (document.querySelector('.modal-first-additional-option').checked) {
+        price = price * 0.75;
+    }
+
+    // 2ая из опций
+    if (document.querySelector('.modal-second-additional-option').checked) {
+        if (isThisDayOff == 1.5) 
+            price = price * 1.25;
+        else 
+            price = price * 1.3;
+    }
+
+   // price = Math.round(price * 100) / 100;
+    price = Math.round(price);
+
+    document.querySelector('.modal-price').innerHTML = "Итоговая стоимость: " + price + " рублей.";
+}
+
 // Обработчик события нажатия на кнопку оформление заявки
 function clickOnMakeAnApplication(event) {
-    alert("DA");
+    document.querySelector('.modal-make-FIO').innerHTML = "Фио гида: " + searchById(globalListGuides, selectGuide).name;
+    document.querySelector('.modal-make-name-route').innerHTML = "Название маршрута: " + searchById(globalListRoutes, selectRoute).name;
+    document.querySelector('.modal-first-additional-option').checked = false;
+    document.querySelector('.modal-second-additional-option').checked = false;
+    document.querySelector('.modal-data').valueAsDate = null;
+    document.querySelector('.modal-time').value = null;
+    document.querySelector('.modal-select-time').selectedIndex = 0;
+    document.querySelector('.modal-number-people').value = null;
+    costCalculation();
+}
+
+// изменение формата даты на YYYY-MM-DD
+function editDate(oldDate) {
+    let newDate = "";
+    newDate += oldDate.getUTCFullYear() + "-";
+    newDate += oldDate.getUTCMonth() + 1 + "-";
+    newDate += oldDate.getUTCDate();
+    return newDate;
+}
+
+// Очистка главнй страницы
+function clearMainWindow() {
+    if (selectRoute && document.querySelector("[data-id='" + selectRoute + "']")) {
+        document.querySelector("[data-id='" + selectRoute + "']").parentNode.parentNode.classList.remove("select-route");
+        document.querySelector("[data-id='" + selectRoute + "']").checked = false;
+    }
+    selectRoute = 0;
+    selectGuide = 0;
+    document.querySelector('.container-btn-make-an-application').classList.add("d-none");
+    document.querySelector('.guidesList').classList.add("d-none");
+}
+
+
+// Сохранение заявки
+async function savingApplication(event) {
+    if (!(document.querySelector('.modal-data').valueAsDate && document.querySelector('.modal-time').value && document.querySelector('.modal-number-people').value)) {
+        alert("Заполните все необходимые поля");
+        //console.log(document.querySelector('.modal-first-additional-option').checked);
+        return;
+    }
+    let formData = new FormData();
+    formData.append('guide_id', selectGuide);
+    formData.append('route_id', selectRoute);
+    formData.append('date', editDate(document.querySelector('.modal-data').valueAsDate));
+    formData.append('time', document.querySelector('.modal-time').value);
+    formData.append('duration', document.querySelector('.modal-select-time').value);
+    formData.append('persons', document.querySelector('.modal-number-people').value);
+    formData.append('price', price);
+    formData.append('optionFirst', Number(document.querySelector('.modal-first-additional-option').checked));
+    formData.append('optionSecond', Number(document.querySelector('.modal-second-additional-option').checked));
+    let thisUrl = new URL(url + "/orders");
+    thisUrl.searchParams.append("api_key", key);
+    try {
+        let response = await fetch(thisUrl, { method: "POST", body: formData });
+        if (response.status == 200) {
+            await response.json();
+            bootstrap.Modal.getOrCreateInstance(makeAnApplication).hide();
+            showAlert("Заявка успешно создана.", "alert-primary");
+            clearMainWindow();
+        } else {
+            let data = await response.json();
+            alert(data.error);
+        }
+    } catch (err) {
+        showAlert(err.message, "alert-danger");
+    }
 }
 
 window.onload = function () {
@@ -437,7 +599,28 @@ window.onload = function () {
     document.querySelector('.list-attractions').onchange = searchByAttractions; // Поиск по Достопримечательностям (выбор)
     document.querySelector('.experience-from').addEventListener('input', searchExperienceFrom); // Поиск гида по опыту ОТ (ввод названия)
     document.querySelector('.experience-up-to').addEventListener('input', searchExperienceUpTo); // Поиск гида по опыту ДО (ввод названия)
-    document.querySelector('.make-an-application').onclick = clickOnMakeAnApplication; // Кнопка оформить заявку
+    document.querySelector('.btn-make-an-application').onclick = clickOnMakeAnApplication; // Кнопка оформить заявку
+    // Внетренее изменение формы заявки для подсчета стоимости 
+    document.querySelector('.modal-data').addEventListener('change', function() {
+        costCalculation();
+    });
+    document.querySelector('.modal-time').addEventListener('change', function() {
+        costCalculation();
+    });
+    document.querySelector('.modal-select-time').addEventListener('change', function() {
+        costCalculation(); 
+    });
+    document.querySelector('.modal-number-people').addEventListener('change', function() {
+        costCalculation();
+    });
+    document.querySelector('.modal-first-additional-option').addEventListener('change', function() {
+        costCalculation();
+    });
+    document.querySelector('.modal-second-additional-option').addEventListener('change', function() {
+        costCalculation();
+    });
+
+    document.querySelector('.modal-btn-save').onclick = savingApplication; // Сохранение заявки
 };
 
 // showAlert("ОШИБКА", "alert-danger"); <--- Пример вывода уведомлений

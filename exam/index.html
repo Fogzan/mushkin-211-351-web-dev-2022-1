@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid px-5 fs-4">
-                <a class="navbar-brand fs-2 px-3" href="#">Экскурсии Москвы</a>
+                <a class="navbar-brand fs-2 px-3" href="index.html"><img src="images\logo.jpg" alt="" class="img-fluid"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -24,16 +24,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">О компании</a>
+                            <a class="nav-link" aria-current="page" href="#description-company">О компании</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Преимущества</a>
+                            <a class="nav-link" href="#advantages-company">Преимущества</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Оформить заявку</a>
+                            <a class="nav-link" href="#make-an-application">Оформить заявку</a>
                         </li>
                     </ul>
-                            <a class="nav-link d-flex justify-content-end" href="#">Личный кабинет</a>
+                    <a class="nav-link d-flex justify-content-end" href="personalaccount.html">Личный кабинет</a>
                 </div>
             </div>
         </nav>
@@ -44,7 +44,7 @@
             <div class="d-none alert alert-warning alert-dismissible" role="alert"></div>
         </div>
 
-        <div class="text-bg-secondary">
+        <div class="text-bg-secondary" id="description-company">
             <div class="container py-4">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 py-2">
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div class="text-bg-light">
+        <div class="text-bg-light" id="advantages-company">
             <div class="container py-4">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 py-2">
@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <div class="text-bg-secondary">
+        <div class="text-bg-secondary" id="make-an-application">
             <div class="text-center fs-1 py-2">Оформить заявку</div>
             <div class="container py-2">
                 <div class="fs-2">Список пешеходных маршрутов</div>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
 
-                <div class="bg-light table-routes w-100">
+                <div class="bg-light overflow-x-scroll w-100">
                     <table class="table w-100">
                         <thead>
                             <tr>
@@ -175,7 +175,7 @@
                     </div>
                 </div>
 
-                <div class="bg-light table-routes w-100">
+                <div class="bg-light overflow-x-scroll w-100">
                     <table class="table w-100">
                         <thead>
                             <tr>
@@ -202,8 +202,9 @@
                     </table>
                 </div>
                 <div class="py-4">
-                    <div class="d-flex justify-content-end d-none containet-btn-make-an-application">
-                        <button type="button" class="btn btn-light btn-lg make-an-application">Оформить заявку</button>
+                    <div class="d-flex justify-content-end d-none container-btn-make-an-application">
+                        <button type="button" class="btn btn-light btn-lg btn-make-an-application" data-bs-toggle="modal"
+                            data-bs-target="#makeAnApplication">Оформить заявку</button>
                     </div>
                 </div>
             </div>
@@ -230,6 +231,63 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+
+    <div class="modal fade modal-make-an-application" id="makeAnApplication" tabindex="-1" aria-labelledby="makeAnApplication" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalLabel">Оформление заявки</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="py-1 modal-make-FIO">ФИО гида: </div>
+                    <div class="py-1 modal-make-name-route">Название маршрута: </div>
+                    <div class="d-flex flex-row flex-wrap py-1">
+                        <div class="px-2 py-1">
+                            <div>Дата экскурсии:</div>
+                            <input type="date" class="modal-data">
+                        </div>
+                        <div class="px-2 py-1">
+                            <div>Время начала:</div>
+                            <input type="time" class="modal-time">
+                        </div>
+                        <div class="px-2 py-1">
+                            <div>Длительность экскурсии:</div>
+                            <select class="form-select modal-select-time">
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="px-2 py-1">
+                            <div>Количество человек:</div>
+                            <input type="number" class="modal-number-people" min="1" max="20">
+                        </div>
+                    </div>
+                    <div class="py-1">Дополнительные опции:</div>
+                    <div class="form-check form-check-inline">
+                        <div class="py-1">
+                            <input class="form-check-input modal-first-additional-option" type="checkbox" value="" id="firstAdditionalOption">
+                            <label class="form-check-label" for="firstAdditionalOption">Использовать скидку для пенсионеров.</label>
+                            <div>Стоимость уменьшается на 25%.</div>
+                        </div>
+                        <div class="py-1">
+                            <input class="form-check-input modal-second-additional-option" type="checkbox" value="" id="secondAdditionalOption">
+                            <label class="form-check-label" for="secondAdditionalOption">Трансфер до ближайших станций метро после экскурсии.</label>
+                            <div>Увеличивает стоимость на 25% в выходные дни и на 30% в будние.</div>
+                        </div>
+                    </div>
+                    <div class="modal-price py-3">Итоговая стоимость:</div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary modal-btn-save">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
