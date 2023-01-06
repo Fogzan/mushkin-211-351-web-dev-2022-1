@@ -147,20 +147,20 @@ function addNewElemRoute(number, infoElem) {
         exapleExcursion.innerHTML += "<td>" + infoElem.description + "</td>";
     } else {
         exapleExcursion.innerHTML += "<td>" + infoElem.description.substring(0, 100)
-        + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-more-detals\" value=\"" 
-        + infoElem.description
-        + "\">Подробнее</button>"+ "</td>";
+            + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-more-detals\" value=\""
+            + infoElem.description
+            + "\">Подробнее</button>" + "</td>";
     }
 
 
     if (infoElem.mainObject.length <= 100) {
         exapleExcursion.innerHTML += "<td>" + infoElem.mainObject + "</td>";
-        
+
     } else {
-        exapleExcursion.innerHTML += "<td>" + infoElem.mainObject.substring(0, 100) 
-        + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-more-detals\" value=\"" 
-        + infoElem.mainObject
-        + "\">Подробнее</button>"+ "</td>";
+        exapleExcursion.innerHTML += "<td>" + infoElem.mainObject.substring(0, 100)
+            + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-more-detals\" value=\""
+            + infoElem.mainObject
+            + "\">Подробнее</button>" + "</td>";
     }
 
 
@@ -188,7 +188,7 @@ function addAttractionsToHtml() {
         let exampleAttractions = document.querySelector(".exaple-attractions").cloneNode(true);
         exampleAttractions.classList = "";
         exampleAttractions.innerHTML = "";
-        exampleAttractions.innerHTML += globalListAttractions[i].substring(0,60);
+        exampleAttractions.innerHTML += globalListAttractions[i].substring(0, 60);
         exampleAttractions.setAttribute("class", "elem-attractions");
         exampleAttractions.setAttribute("value", globalListAttractions[i]);
         attractionsListHtml.append(exampleAttractions);
@@ -617,36 +617,36 @@ function loadBtnMoreAndLessDetals() {
 function descriptionLessDetals(event) {
     let fullDescription = event.target.parentNode.innerHTML.trim();
     fullDescription = fullDescription.substring(0, fullDescription.indexOf("<"));
-    event.target.parentNode.innerHTML = event.target.value 
-    + "  <br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-more-detals\" value=\"  " 
-    + fullDescription 
-    + "\"> Подробнее </button>";
+    event.target.parentNode.innerHTML = event.target.value
+        + "  <br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-more-detals\" value=\"  "
+        + fullDescription
+        + "\"> Подробнее </button>";
     loadBtnMoreAndLessDetals();
 }
 
 function mainObjectLessDetals(event) {
     let fullMainObject = event.target.parentNode.innerHTML.trim();
     fullMainObject = fullMainObject.substring(0, fullMainObject.indexOf("<"));
-    event.target.parentNode.innerHTML = event.target.value 
-    + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-more-detals\" value=\"" 
-    + fullMainObject
-    + "\"> Подробнее </button>";
+    event.target.parentNode.innerHTML = event.target.value
+        + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-more-detals\" value=\""
+        + fullMainObject
+        + "\"> Подробнее </button>";
     loadBtnMoreAndLessDetals();
 }
 
 function descriptionMoreDetals(event) {
-    event.target.parentNode.innerHTML = event.target.value 
-    + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-less-detals\" value=\"" 
-    + event.target.value.substring(0, 100)
-    + "\"> Скрыть </button>";
+    event.target.parentNode.innerHTML = event.target.value
+        + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-less-detals\" value=\""
+        + event.target.value.substring(0, 100)
+        + "\"> Скрыть </button>";
     loadBtnMoreAndLessDetals();
 }
 
 function mainObjectMoreDetals(event) {
-    event.target.parentNode.innerHTML = event.target.value 
-    + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-less-detals\" value=\"" 
-    + event.target.value.substring(0, 100)
-    + "\"> Скрыть </button>";
+    event.target.parentNode.innerHTML = event.target.value
+        + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-less-detals\" value=\""
+        + event.target.value.substring(0, 100)
+        + "\"> Скрыть </button>";
     loadBtnMoreAndLessDetals();
 }
 

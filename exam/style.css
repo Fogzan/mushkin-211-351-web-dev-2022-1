@@ -2,7 +2,8 @@
     margin: 0 2px 0 2px;
 }
 
-.select-route, .select-guide {
+.select-route,
+.select-guide {
     background-color: orange;
 }
 
