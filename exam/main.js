@@ -26,22 +26,6 @@ function showAlert(error, color) {
     alerts.append(alert);
 }
 
-// Показ уведомлений в личном кабинете
-function showAlertPerson(error, color) {
-    let alerts = document.querySelector(".alerts-person");
-    let alert = document.createElement("div");
-    alert.classList.add("alert", "alert-dismissible", color);
-    alert.append(error);
-
-    let btn = document.createElement("button");
-    btn.setAttribute("type", "button");
-    btn.classList.add("btn-close");
-    btn.setAttribute("data-bs-dismiss", "alert");
-    btn.setAttribute("aria-label", "Close");
-    alert.append(btn);
-    alerts.append(alert);
-}
-
 // Сортировка маршрутов 
 // searchElement = name / mainObject
 function sortJson(oldJson, searchElement, searchText) {
@@ -70,7 +54,7 @@ function sortJson(oldJson, searchElement, searchText) {
         }
     }
     //if (searchElement == "name" || searchElement == "mainObject")
-        temporaryListRoutes = newJson;
+    temporaryListRoutes = newJson;
     return newJson;
 }
 
@@ -100,13 +84,13 @@ async function downloadFromServerRoutes() {
 // Загрузка количество страниц и выбранной страницы (на вход: количество страниц)
 function loadNumberPages(numberPage, maxPages) {
     //console.log(numberPage + " " + maxPages);
-    let page0 = document.querySelectorAll("[data-page=\"0\"]")[0];
-    let page1 = document.querySelectorAll("[data-page=\"1\"]")[0];
-    let page2 = document.querySelectorAll("[data-page=\"2\"]")[0];
-    let page3 = document.querySelectorAll("[data-page=\"3\"]")[0];
-    let page4 = document.querySelectorAll("[data-page=\"4\"]")[0];
-    let page5 = document.querySelectorAll("[data-page=\"5\"]")[0];
-    let page6 = document.querySelectorAll("[data-page=\"6\"]")[0];
+    let page0 = document.querySelector("[data-page=\"0-excursions\"]");
+    let page1 = document.querySelector("[data-page=\"1-excursions\"]");
+    let page2 = document.querySelector("[data-page=\"2-excursions\"]");
+    let page3 = document.querySelector("[data-page=\"3-excursions\"]");
+    let page4 = document.querySelector("[data-page=\"4-excursions\"]");
+    let page5 = document.querySelector("[data-page=\"5-excursions\"]");
+    let page6 = document.querySelector("[data-page=\"6-excursions\"]");
 
     page1.innerHTML = Number(numberPage) - 2;
     page2.innerHTML = Number(numberPage) - 1;
@@ -158,11 +142,31 @@ function addNewElemRoute(number, infoElem) {
     exapleExcursion.classList = "route";
     exapleExcursion.innerHTML += "<td scope=\"row\">" + number + "</td>";
     exapleExcursion.innerHTML += "<td>" + infoElem.name + "</td>";
-    exapleExcursion.innerHTML += "<td>" + infoElem.description + "</td>";
-    exapleExcursion.innerHTML += "<td>" + infoElem.mainObject + "</td>";
+
+    if (infoElem.description.length <= 100) {
+        exapleExcursion.innerHTML += "<td>" + infoElem.description + "</td>";
+    } else {
+        exapleExcursion.innerHTML += "<td>" + infoElem.description.substring(0, 100)
+        + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-more-detals\" value=\"" 
+        + infoElem.description
+        + "\">Подробнее</button>"+ "</td>";
+    }
+
+
+    if (infoElem.mainObject.length <= 100) {
+        exapleExcursion.innerHTML += "<td>" + infoElem.mainObject + "</td>";
+        
+    } else {
+        exapleExcursion.innerHTML += "<td>" + infoElem.mainObject.substring(0, 100) 
+        + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-more-detals\" value=\"" 
+        + infoElem.mainObject
+        + "\">Подробнее</button>"+ "</td>";
+    }
+
+
     let check_input = "<td><input class=\"form-check-input radio-route\" type=\"radio\" name=\"radio-route\" value=\"" + infoElem.id + "\" data-id=\"" + infoElem.id + "\"></td>";
     exapleExcursion.innerHTML += check_input;
-    let listExcursion = document.querySelectorAll(".list-excursion")[0];
+    let listExcursion = document.querySelector(".list-excursion");
     listExcursion.append(exapleExcursion);
 }
 
@@ -184,7 +188,7 @@ function addAttractionsToHtml() {
         let exampleAttractions = document.querySelector(".exaple-attractions").cloneNode(true);
         exampleAttractions.classList = "";
         exampleAttractions.innerHTML = "";
-        exampleAttractions.innerHTML += globalListAttractions[i];
+        exampleAttractions.innerHTML += globalListAttractions[i].substring(0,60);
         exampleAttractions.setAttribute("class", "elem-attractions");
         exampleAttractions.setAttribute("value", globalListAttractions[i]);
         attractionsListHtml.append(exampleAttractions);
@@ -203,18 +207,19 @@ async function loadRoutesStart(numberPage) {
 
 // Заполнение таблицы маршрутов (На вход номер страницы)
 function loadRoutes(numberPage, routes) {
-    if (routes.length % 5 == 0) countOfPages = routes.length / 5;
-    else countOfPages = Math.floor(routes.length / 5) + 1;
+    if (routes.length % 10 == 0) countOfPages = routes.length / 10;
+    else countOfPages = Math.floor(routes.length / 10) + 1;
     loadNumberPages(numberPage, countOfPages);
     let allExcursionRoute = document.querySelectorAll(".route");
     for (let i = 0; i < allExcursionRoute.length; i++) {
         let elem = allExcursionRoute[i];
         elem.parentNode.removeChild(elem);
     }
-    for (let i = (numberPage * 5) - 5; i < numberPage * 5; i++) {
+    for (let i = (numberPage * 10) - 10; i < numberPage * 10; i++) {
         if (routes[i]) addNewElemRoute(i + 1, routes[i])
         //console.log(routes[i]);
     }
+    loadBtnMoreAndLessDetals();
     //console.log(document.querySelectorAll('.radio-route'));
     let radioList = document.querySelectorAll('.radio-route');
     //console.log(radioList);
@@ -233,9 +238,9 @@ function clickPageBtn(event) {
     if (event.target.dataset.page) {
         //console.log(temporaryListRoutes, globalListRoutes);
         //console.log(event.target.innerHTML);
-        if (event.target.dataset.page == 0) {
+        if (event.target.dataset.page == "0-excursions") {
             loadRoutes(1, temporaryListRoutes);
-        } else if (event.target.dataset.page == 6) {
+        } else if (event.target.dataset.page == "6-excursions") {
             loadRoutes(countOfPages, temporaryListRoutes);
         } else {
             loadRoutes(Number(event.target.innerHTML), temporaryListRoutes);
@@ -251,7 +256,7 @@ function startSortRoutes() {
     if (attractionsRoute || nameRoute) {
         if (nameRoute) {
             listRoutes = sortJson(listRoutes, "name", nameRoute);
-        } 
+        }
         if (attractionsRoute) {
             listRoutes = sortJson(listRoutes, "mainObject", attractionsRoute);
         }
@@ -271,7 +276,7 @@ function startSortGuides() {
     if (languageGuides || experienceFrom || experienceUpTo) {
         if (languageGuides) {
             listGuides = sortJson(listGuides, "language", languageGuides);
-        } 
+        }
         if (experienceFrom || experienceUpTo) {
             listGuides = sortJsonExpWork(listGuides, experienceFrom, experienceUpTo);
         }
@@ -463,7 +468,7 @@ function searchById(jsonArray, idElem) {
 function costCalculation(event) {
     price = 1;
     let guideServiceCost = searchById(globalListGuides, selectGuide).pricePerHour;
-    let hoursNumber = Number(document.querySelector('.modal-select-time').options[ document.querySelector('.modal-select-time').selectedIndex ].value);
+    let hoursNumber = Number(document.querySelector('.modal-select-time').options[document.querySelector('.modal-select-time').selectedIndex].value);
     price = price * guideServiceCost * hoursNumber;
     let isThisDayOff;
     if (document.querySelector('.modal-data').valueAsDate) {
@@ -471,8 +476,8 @@ function costCalculation(event) {
         let day = document.querySelector('.modal-data').valueAsDate.getUTCDate();
         let nDay = document.querySelector('.modal-data').valueAsDate.getUTCDay();
         if (nDay == 6 || nDay == 0) isThisDayOff = 1.5;
-        else if (((month == 1) && (day >= 1 && day <= 9)) || ((month == 3) && (day >= 6 && day <= 8)) || ((month == 4) && (day >= 30) ||  (month == 5) && (day <= 3)) || 
-        ((month == 5) && (day >= 7 && day <= 10)) || ((month == 6) && (day >= 11 && day <= 13)) || ((month == 11) && (day >= 4 && day <= 6))) {
+        else if (((month == 1) && (day >= 1 && day <= 9)) || ((month == 3) && (day >= 6 && day <= 8)) || ((month == 4) && (day >= 30) || (month == 5) && (day <= 3)) ||
+            ((month == 5) && (day >= 7 && day <= 10)) || ((month == 6) && (day >= 11 && day <= 13)) || ((month == 11) && (day >= 4 && day <= 6))) {
             isThisDayOff = 1.5;
         } else isThisDayOff = 1;
         price = price * isThisDayOff;
@@ -510,13 +515,13 @@ function costCalculation(event) {
 
     // 2ая из опций
     if (document.querySelector('.modal-second-additional-option').checked) {
-        if (isThisDayOff == 1.5) 
+        if (isThisDayOff == 1.5)
             price = price * 1.25;
-        else 
+        else
             price = price * 1.3;
     }
 
-   // price = Math.round(price * 100) / 100;
+    // price = Math.round(price * 100) / 100;
     price = Math.round(price);
 
     document.querySelector('.modal-price').innerHTML = "Итоговая стоимость: " + price + " рублей.";
@@ -568,6 +573,11 @@ async function savingApplication(event) {
     formData.append('guide_id', selectGuide);
     formData.append('route_id', selectRoute);
     formData.append('date', editDate(document.querySelector('.modal-data').valueAsDate));
+    let minuts = document.querySelector('.modal-time').value.split(':')[1];
+    if (minuts != "00" && minuts != "30") {
+        alert("Время начала экскурсии в 0 или 30 минут");
+        return;
+    }
     formData.append('time', document.querySelector('.modal-time').value);
     formData.append('duration', document.querySelector('.modal-select-time').value);
     formData.append('persons', document.querySelector('.modal-number-people').value);
@@ -592,6 +602,55 @@ async function savingApplication(event) {
     }
 }
 
+// Подробнее кнопки
+function loadBtnMoreAndLessDetals() {
+    let allDescription = document.querySelectorAll('.description-more-detals');
+    for (let i = 0; i < allDescription.length; i++) allDescription[i].onclick = descriptionMoreDetals;
+    let allMainObject = document.querySelectorAll('.mainObject-more-detals');
+    for (let i = 0; i < allMainObject.length; i++) allMainObject[i].onclick = mainObjectMoreDetals;
+    let allDescriptionLess = document.querySelectorAll('.description-less-detals');
+    for (let i = 0; i < allDescriptionLess.length; i++) allDescriptionLess[i].onclick = descriptionLessDetals;
+    let allMainObjectLess = document.querySelectorAll('.mainObject-less-detals');
+    for (let i = 0; i < allMainObjectLess.length; i++) allMainObjectLess[i].onclick = mainObjectLessDetals;
+}
+
+function descriptionLessDetals(event) {
+    let fullDescription = event.target.parentNode.innerHTML.trim();
+    fullDescription = fullDescription.substring(0, fullDescription.indexOf("<"));
+    event.target.parentNode.innerHTML = event.target.value 
+    + "  <br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-more-detals\" value=\"  " 
+    + fullDescription 
+    + "\"> Подробнее </button>";
+    loadBtnMoreAndLessDetals();
+}
+
+function mainObjectLessDetals(event) {
+    let fullMainObject = event.target.parentNode.innerHTML.trim();
+    fullMainObject = fullMainObject.substring(0, fullMainObject.indexOf("<"));
+    event.target.parentNode.innerHTML = event.target.value 
+    + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-more-detals\" value=\"" 
+    + fullMainObject
+    + "\"> Подробнее </button>";
+    loadBtnMoreAndLessDetals();
+}
+
+function descriptionMoreDetals(event) {
+    event.target.parentNode.innerHTML = event.target.value 
+    + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 description-less-detals\" value=\"" 
+    + event.target.value.substring(0, 100)
+    + "\"> Скрыть </button>";
+    loadBtnMoreAndLessDetals();
+}
+
+function mainObjectMoreDetals(event) {
+    event.target.parentNode.innerHTML = event.target.value 
+    + "<br><button type=\"button\" class=\"btn btn-link p-0 m-0 mainObject-less-detals\" value=\"" 
+    + event.target.value.substring(0, 100)
+    + "\"> Скрыть </button>";
+    loadBtnMoreAndLessDetals();
+}
+
+
 window.onload = function () {
     document.querySelector('.pagination').onclick = clickPageBtn; // Выбор страницы с маршрутами (клики)
     loadRoutesStart(1); // Загрузка 1ой страницы маршрутов
@@ -601,25 +660,24 @@ window.onload = function () {
     document.querySelector('.experience-up-to').addEventListener('input', searchExperienceUpTo); // Поиск гида по опыту ДО (ввод названия)
     document.querySelector('.btn-make-an-application').onclick = clickOnMakeAnApplication; // Кнопка оформить заявку
     // Внетренее изменение формы заявки для подсчета стоимости 
-    document.querySelector('.modal-data').addEventListener('change', function() {
+    document.querySelector('.modal-data').addEventListener('change', function () {
         costCalculation();
     });
-    document.querySelector('.modal-time').addEventListener('change', function() {
+    document.querySelector('.modal-time').addEventListener('change', function () {
         costCalculation();
     });
-    document.querySelector('.modal-select-time').addEventListener('change', function() {
-        costCalculation(); 
-    });
-    document.querySelector('.modal-number-people').addEventListener('change', function() {
+    document.querySelector('.modal-select-time').addEventListener('change', function () {
         costCalculation();
     });
-    document.querySelector('.modal-first-additional-option').addEventListener('change', function() {
+    document.querySelector('.modal-number-people').addEventListener('change', function () {
         costCalculation();
     });
-    document.querySelector('.modal-second-additional-option').addEventListener('change', function() {
+    document.querySelector('.modal-first-additional-option').addEventListener('change', function () {
         costCalculation();
     });
-
+    document.querySelector('.modal-second-additional-option').addEventListener('change', function () {
+        costCalculation();
+    });
     document.querySelector('.modal-btn-save').onclick = savingApplication; // Сохранение заявки
 };
 

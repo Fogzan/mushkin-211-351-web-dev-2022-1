@@ -5,3 +5,7 @@
 .select-route, .select-guide {
     background-color: orange;
 }
+
+.form-check-label {
+    opacity: 100 !important;
+}
